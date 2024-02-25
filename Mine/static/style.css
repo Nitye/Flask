@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+}
+
+nav {
+  background-color: black;
+  margin: 0;
+  padding: 10px;
+}
+
+.nav_button {
+  background-color: black;
+  color: grey;
+  border: none;
+  cursor: pointer;
+  padding: 7px 15px;
+  transition: color 0.1s;
+}
+
+.nav_button:hover{
+  color: white;
+}
+
+form {
+  padding: 10px 20px;
+}
+
+label {
+  font-weight: bold;
+  margin: 5px 10px;
+}
+
+input {
+  margin: 10px;
+  padding: 4px;
+}
+
+.submit-button {
+  margin: 10px;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+  border: None;
+  border-radius: 7px;
+  font-size: 15px;
+  padding: 5px 10px;
+}
