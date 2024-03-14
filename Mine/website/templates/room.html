@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %} Room - {{code}} {% endblock %}
+{% block onclick %}
+<a href="/{{user.first_name}}/home">
+  <button class="nav_button" 
+  onclick="disconnect_to_room('{{user.first_name}}', '{{code}}')">
+   Home
+  </button></a>
+  <a href="/logout">
+    <button class="nav_button"
+    onclick="disconnect_to_room('{{user.first_name}}', '{{code}}')">
+     Logout
+    </button></a>
+{% endblock %}
+{% block nav %}
+<a href="/{{user.first_name}}/home">
+  <button class ="nav_button" 
+  onclick="disconnect_to_room('{{user.first_name}}', '{{code}}')">
+    Leave Room
+  </button></a>
+{% endblock %}
+{% block content %}
+<h2 align = 'center'> Room code: {{code}}</h2>
+<div class="members" id="members">
+  <ul>
+    {% for member in members %}
+    <li>{{member}}</li>
+    {% endfor %}
+  </ul>
+</div>
+<div id="output">
+  {% for msg in old_messages %}
+  <p>{{msg}}</p>
+  {% endfor %}
+</div>
+<div class = 'inputs'>
+  <input type="text" rows="3" placeholder="Message" name="Message" id="Message" />
+  <button class="submit-button" 
+  onclick="sendMessage('{{user.first_name}}');
+  socketio.emit('refresh_messages', '{{code}}');">Send</button>
+</div>
+<div class="poker_inputs" id="poker_inputs">
+  <button class="submit-button" onclick=
+  "socketio.emit('output');">  Start Game  </button>
+  <button class="submit-button" onclick=
+  "socketio.emit('set_1', '{{user.first_name}}', '{{code}}');">  1  </button>
+  <button class="submit-button" onclick=
+  "socketio.emit('set_2', '{{user.first_name}}', '{{code}}');">  2  </button>
+  <button class="submit-button" onclick=
+  "socketio.emit('set_3', '{{user.first_name}}', '{{code}}');">  3  </button>
+</div>
+<div class="poker_outputs" id="poker_outputs">
+</div>
+<script>
+  connect_to_room('{{user.first_name}}','{{code}}');
+  socketio.emit('refresh_messages', '{{code}}');
+  recvMessage();
+  loadMessages();
+  recvOutput();
+  loadOutput();
+</script>
+{% endblock %}

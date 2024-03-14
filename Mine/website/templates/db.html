@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for i in rooms %}
+<p>{{i}} {{i.number_of_members}}</p>
+{% endfor %}
+{% for j in users %}
+<p>{{j}} {{j.room}} {{j.current_sid}}</p>
+{% endfor %}
+<p>{{empty_rooms}}</p>
+{% endblock %}
