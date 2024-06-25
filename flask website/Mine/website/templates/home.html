@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<h1 align = 'center'>{{user.first_name}}</h1>
+<form method='POST'>
+  <h2 align = 'center'>Room</h2>
+  <div class="room">
+  <label>Room code</label><br>
+  <div class="join">
+    <input type='text' id='room_code' name='room_code' placeholder='Enter room code' /><br>
+    <button type='submit' name = 'join' id='join' class='submit-button'>Join Room</button>
+  </div>
+  </div>
+  <button type='submit' name="create" id='create' class='submit-button'>Create Room</button>
+</form>
+{% endblock %}

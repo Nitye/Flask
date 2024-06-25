@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>{% block title %} {% endblock %}</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" 
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" 
+    crossorigin="anonymous"></script>
+    <script type = 'text/javascript' 
+    src = "{{url_for('static', filename='js/index.js')}}"></script>
+    <nav>
+      {% if user.is_authenticated %}
+      {% block onclick %}
+      <a href="/{{user.first_name}}/home">
+        <button class="nav_button">
+         Home
+        </button></a>
+        <a href="/logout">
+          <button class="nav_button">
+           Logout
+          </button></a>
+      {% endblock %}
+          {% else %}
+          <a href="/">
+            <button class="nav_button">
+         Home
+        </button></a>
+      <a href="/login">
+      <button class="nav_button">
+       Login
+      </button></a>
+      <a href="/sign-up">
+        <button class ="nav_button">
+          Sign-Up
+        </button></a>
+        {% endif %}
+      {% block nav %}{% endblock %}
+    </nav>
+    
+    {% with messages = get_flashed_messages(with_categories = true) %}
+    {% if messages %}
+    {% for category, message in messages%}
+    {% if category == 'error'%}
+    <div class="error-msg-div" role="alert">
+      {{message}}
+      <button class="close-alert" data-dismiss = 'alert'
+      onclick="document.querySelector('.error-msg-div').innerHTML = ' '">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% else %}
+    <div class="success-msg-div" role="alert">
+      {{message}}
+      <button class="close-alert" data-dismiss = 'alert'
+      onclick="document.querySelector('.success-msg-div').innerHTML = ' '">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>

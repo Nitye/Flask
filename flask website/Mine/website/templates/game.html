@@ -1,0 +1,16 @@
+{% extends 'room.html' %}
+{% block title %} Game - {{code}} {% endblock %}
+{% block poker %}
+<div class="poker" id="poker">
+<div class="poker_inputs" id="poker_inputs">
+  <button class="submit-button" onclick=
+  "socketio.emit('set_1', '{{user.first_name}}', '{{code}}');">  1  </button>
+  <button class="submit-button" onclick=
+  "socketio.emit('set_2', '{{user.first_name}}', '{{code}}');">  2  </button>
+  <button class="submit-button" onclick=
+  "socketio.emit('set_3', '{{user.first_name}}', '{{code}}');">  3  </button>
+</div>
+<div class="poker_outputs" id="poker_outputs">
+</div>
+</div>
+{% endblock %}
